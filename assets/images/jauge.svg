@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="430" height="338" viewBox="0 0 430 338">
+  <defs>
+    <clipPath id="clip-loarder_1">
+      <rect width="430" height="338"/>
+    </clipPath>
+  </defs>
+  <g id="loarder_1" data-name="loarder – 1" clip-path="url(#clip-loarder_1)">
+    <rect width="430" height="338" fill="#fff"/>
+    <g id="checker" transform="translate(-0.521 -77.22)">
+      <path id="Path_1" data-name="Path 1" d="M36.6,16.7S11,34.7-2.6,60.7s-13.2,55.8-13.2,55.8" transform="matrix(1, 0.017, -0.017, 1, 110.664, 189.329)" fill="none" stroke="rgba(59,220,252,0.75)" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"/>
+      <path id="Path_2" data-name="Path 2" d="M2.8-.7s26.329-15.256,57-14.8S102.6-8.3,118.6-.7" transform="translate(154.5 201.5)" fill="none" stroke="#42d54c" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"/>
+      <path id="Path_3" data-name="Path 3" d="M-.049.972S28.6,19.7,41,45.7,54.87,99.028,54.87,99.028" transform="matrix(1, -0.017, 0.017, 1, 281.621, 205.986)" fill="none" stroke="rgba(240,60,55,0.75)" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"/>
+    </g>
+  </g>
+</svg>
