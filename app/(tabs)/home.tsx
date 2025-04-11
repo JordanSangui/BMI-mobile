@@ -13,16 +13,13 @@ import { LinearGradient } from 'expo-linear-gradient';
 export default function Calculator() {
     const [weight, setWeight] = useState('');
     const [height, setHeight] = useState('');
-    const [gender, setGender] = useState('Homme');
+    const [gender, setGender] = useState<number>(1);
 
     const calculateIMC = () => {
         if (weight && height) {
-            const weightNum = parseFloat(weight);
-            const heightNum = parseFloat(height) / 100;
-            const imc = weightNum / (heightNum * heightNum);
             router.push({
                 pathname: '/result',
-                params: { imc: imc.toFixed(1), weight, height, gender },
+                params: { weight, height, gender },
             });
         }
     };
@@ -105,15 +102,14 @@ export default function Calculator() {
                         <TouchableOpacity
                             style={[
                                 styles.genderButton,
-                                gender === 'Homme' && styles.genderButtonActive,
+                                gender === 1 && styles.genderButtonActive,
                             ]}
-                            onPress={() => setGender('Homme')}
+                            onPress={() => setGender(1)}
                         >
                             <Text
                                 style={[
                                     styles.genderText,
-                                    gender === 'Homme' &&
-                                        styles.genderTextActive,
+                                    gender === 1 && styles.genderTextActive,
                                 ]}
                             >
                                 Homme
@@ -122,15 +118,14 @@ export default function Calculator() {
                         <TouchableOpacity
                             style={[
                                 styles.genderButton,
-                                gender === 'Femme' && styles.genderButtonActive,
+                                gender === 0 && styles.genderButtonActive,
                             ]}
-                            onPress={() => setGender('Femme')}
+                            onPress={() => setGender(0)}
                         >
                             <Text
                                 style={[
                                     styles.genderText,
-                                    gender === 'Femme' &&
-                                        styles.genderTextActive0,
+                                    gender === 0 && styles.genderTextActive0,
                                 ]}
                             >
                                 Femme

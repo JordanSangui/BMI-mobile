@@ -1,12 +1,56 @@
-import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import {
+    View,
+    Text,
+    TouchableOpacity,
+    StyleSheet,
+    Image,
+    ActivityIndicator,
+} from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import { ArrowLeft, Share2 } from 'lucide-react-native';
 import Svg, { G, Path } from 'react-native-svg';
+import { useEffect, useState } from 'react';
+import { fetchBmi } from '@/api/fetchBmi';
+import { BmiResponse } from '@/constants/Types';
 
 export default function Result() {
-    const { imc, weight, height, gender } = useLocalSearchParams();
-    const imcNum = parseFloat(imc as string);
+    const [bmiData, setBmiData] = useState<BmiResponse | null>(null);
+    const [error, setError] = useState<string | null>(null);
+    const [loading, setLoading] = useState(true);
+    const { weight, height, gender } = useLocalSearchParams();
+    useEffect(() => {
+        if (
+            typeof weight === 'string' &&
+            typeof height === 'string' &&
+            typeof gender === 'string'
+        ) {
+            const weightNum = parseFloat(weight);
+            const heightNum = parseFloat(height);
+            const genderNum = parseInt(gender, 10);
+
+            fetchBmi(weightNum, heightNum, genderNum).then((res) => {
+                if ('bmi' in res) {
+                    setBmiData(res);
+                } else {
+                    setError(res.message);
+                }
+                setLoading(false);
+            });
+        }
+    }, []);
+
+    if (loading)
+        return (
+            <View style={styles.activityIndicator}>
+                <ActivityIndicator size="large" color="#4B9CD3" />
+            </View>
+        );
+    if (error) return <Text>Erreur: {error}</Text>;
+    if (!bmiData) return <Text>Erreur: Aucune donnée</Text>;
+
+    const imc = bmiData.bmi;
+    const imcNum = imc;
 
     const getIMCCategory = () => {
         if (imcNum < 18.5) return 'Insuffisance pondérale';
@@ -221,6 +265,12 @@ export default function Result() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+    },
+    activityIndicator: {
+        flex: 1, // prend tout l’espace dispo
+        justifyContent: 'center', // centre verticalement
+        alignItems: 'center', // centre horizontalement
+        backgroundColor: '#f0f4f8', // petit fond doux optionnel
     },
     header: {
         flexDirection: 'row',
